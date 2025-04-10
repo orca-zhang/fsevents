@@ -202,7 +202,7 @@ func echo(t *testing.T, trunc bool, data string, path ...string) {
 		if trunc {
 			fp, err = os.Create(join(path...))
 		} else {
-			fp, err = os.OpenFile(join(path...), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+			fp, err = os.OpenFile(join(path...), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o666)
 		}
 		if err != nil {
 			return err

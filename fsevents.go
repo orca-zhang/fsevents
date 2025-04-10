@@ -53,11 +53,10 @@ func DeviceForPath(path string) (int32, error) {
 //	es.Stop()
 //	...
 type EventStream struct {
-	stream       fsEventStreamRef
-	qref         fsDispatchQueueRef
-	hasFinalizer bool
-	registryID   uintptr
-	uuid         string
+	stream     fsEventStreamRef
+	qref       fsDispatchQueueRef
+	registryID uintptr
+	uuid       string
 
 	// Events holds the channel on which events will be sent.
 	// It's initialized by EventStream.Start if nil.
@@ -163,10 +162,10 @@ func (es *EventStream) Flush(sync bool) {
 
 // Stop stops listening to the event stream.
 func (es *EventStream) Stop() {
-	if es.stream != nil {
+	if es.stream != 0 {
 		stop(es.stream, es.qref)
-		es.stream = nil
-		es.qref = nil
+		es.stream = 0
+		es.qref = 0
 	}
 
 	// Remove eventstream from the registry

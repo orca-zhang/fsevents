@@ -13,8 +13,8 @@ func TestCreatePath(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if e := 2; cfArrayLen(ref) != e {
-		t.Errorf("got: %d wanted: %d", cfArrayLen(ref), e)
+	if e := 2; CFArrayLen(ref) != e {
+		t.Errorf("got: %d wanted: %d", CFArrayLen(ref), e)
 	}
 }
 

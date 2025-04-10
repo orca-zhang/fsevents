@@ -82,7 +82,7 @@ func TestBasicExample(t *testing.T) {
 		}
 	}()
 
-	err = os.WriteFile(filepath.Join(path, "example.txt"), []byte("example"), 0700)
+	err = os.WriteFile(filepath.Join(path, "example.txt"), []byte("example"), 0o700)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -116,7 +116,7 @@ func TestIssue48(t *testing.T) {
 	var filenames []string
 	for i := 0; i < 4096; i++ {
 		newFilename := filepath.Join(path, fmt.Sprint("test", i))
-		err = os.WriteFile(newFilename, []byte("test"), 0700)
+		err = os.WriteFile(newFilename, []byte("test"), 0o700)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -126,7 +126,7 @@ func TestIssue48(t *testing.T) {
 	es := &EventStream{
 		Paths:   filenames,
 		Latency: 500 * time.Millisecond,
-		Device:  0, //dev,
+		Device:  0, // dev,
 		Flags:   FileEvents,
 	}
 
@@ -148,7 +148,7 @@ func TestIssue48(t *testing.T) {
 	}()
 
 	// write some new contents to test42 in the watchlist
-	err = os.WriteFile(filenames[42], []byte("special"), 0700)
+	err = os.WriteFile(filenames[42], []byte("special"), 0o700)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +159,7 @@ func TestIssue48(t *testing.T) {
 	/////
 	// create one more file that puts it over the edge
 	newFilename := filepath.Join(path, fmt.Sprint("test", 4096))
-	err = os.WriteFile(newFilename, []byte("test"), 0700)
+	err = os.WriteFile(newFilename, []byte("test"), 0o700)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,7 +169,7 @@ func TestIssue48(t *testing.T) {
 	es2 := &EventStream{
 		Paths:   filenames,
 		Latency: 500 * time.Millisecond,
-		Device:  0, //dev,
+		Device:  0, // dev,
 		Flags:   FileEvents,
 	}
 
