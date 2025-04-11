@@ -146,6 +146,8 @@ func (es *EventStream) Start() error {
 	es.uuid = GetDeviceUUID(es.Device)
 	err := es.start(es.Paths, cbInfo)
 	if err != nil {
+		es.stream = 0
+		es.qref = 0
 		// Remove eventstream from the registry
 		registry.Delete(es.registryID)
 		es.registryID = 0
